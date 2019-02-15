@@ -14,7 +14,7 @@ var firstPike = {
     render: function(){
         for(var i = 0; i < hours.length; i++){
             var liEl = document.createElement('li');
-            liEl.textContent = hours[i] + ': ' + this.random() + ' cookies.';
+            liEl.textContent = hours[i] + ': ' + this.random().toFixed(0) + ' cookies.';
             pikeUl.appendChild(liEl);
         }
     }
