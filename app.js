@@ -7,13 +7,14 @@ var firstPike = {
     minHrlyCust: 23,
     maxHrlyCust: 65,
     avgCookieHr: 6.5,
-    render: function getRandomNumber(minHrlyCust, maxHrlyCust){
-        return Math.random() * (minHrlyCust, maxHrlyCust) + minHrlyCust;
+    random: function getRandomNumber(){
+        console.log('random');
+        return Math.random() * (this.minHrlyCust, this.maxHrlyCust) + this.minHrlyCust;
     },
     render: function(){
         for(var i = 0; i < hours.length; i++){
             var liEl = document.createElement('li');
-        liEl.textContent = hours[i] + ': ' + this.avgCookieHr[i] + ' cookies.';
+            liEl.textContent = hours[i] + ': ' + this.random() + ' cookies.';
             pikeUl.appendChild(liEl);
         }
     }
