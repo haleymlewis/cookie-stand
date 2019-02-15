@@ -6,10 +6,10 @@ var pikeUl = document.getElementById('pike');
 var firstPike = {
     minHrlyCust: 23,
     maxHrlyCust: 65,
-    avgCookieHr: 6.5,
+    avgCookie: 6.5,
     random: function getRandomNumber(){
-        console.log('random');
-        return Math.random() * (this.minHrlyCust, this.maxHrlyCust) + this.minHrlyCust;
+        // console.log('random');
+        return Math.random() * ((this.minHrlyCust, this.maxHrlyCust) * this.avgCookie);
     },
     render: function(){
         for(var i = 0; i < hours.length; i++){
