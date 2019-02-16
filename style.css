@@ -7,3 +7,11 @@ h1 {
     font-family: 'Courier New', Courier, monospace;
     color: rgb(68, 39, 39);
 }
+thead {
+    background: #888;
+  }
+  
+td {
+    padding: 20px;
+    border: solid 1px black;
+  }
