@@ -13,8 +13,11 @@ function Stores(minHrlyCust, maxHrlyCust, list, avgCookie) {
     this.avgCookie = avgCookie;
     this.list = list;
     var bigAssArray = [];
+    console.log(bigAssArray);
     this.random = function(){
-        return Math.random() * ((this.minHrlyCust, this.maxHrlyCust) * this.avgCookie);
+        var cookiesPerHr = Math.random() * ((this.minHrlyCust, this.maxHrlyCust) * this.avgCookie);
+        bigAssArray.push(cookiesPerHr);
+        return cookiesPerHr;
     };
     this.render = function(){
         for(var i = 0; i < hours.length; i++){
@@ -23,10 +26,8 @@ function Stores(minHrlyCust, maxHrlyCust, list, avgCookie) {
             this.list.appendChild(liEl);
         };
     }
-    bigAssArray.push(this.avgCookie);
 
 }
-
 var firstPike = new Stores(23, 65, pikeUl, 6.5);
 firstPike.render();
 
