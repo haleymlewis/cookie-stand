@@ -12,8 +12,13 @@ var table = document.getElementById('table');
 
 var thead = document.createElement('th');
 
-thead = function () {
-    for (var i = 0; i = hours.length; i++) {
+function header() {
+    console.log('thead fired')
+    var trEl = document.createElement('tr');
+    var tdEl = document.createElement('td');
+    tdEl.textContent = "Locations";
+    trEl.appendChild(tdEl);
+    for (var i = 0; i < hours.length; i++) {
         var tdEl = document.createElement('td');
         tdEl.textContent = hours[i];
     }
@@ -65,6 +70,7 @@ var tfootEl = document.createElement('tfoot');
 // }
 // console.log(math());
 
+header();
 var firstPike = new Stores('First and Pike', 23, 65, pike, 6.5);
 firstPike.random();
 firstPike.render();
