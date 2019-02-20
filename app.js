@@ -2,11 +2,22 @@
 
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
 
-var pikeUl = document.getElementById('pike');
-var airportUl = document.getElementById('airport');
-var seaCentUl = document.getElementById('seaCent');
-var capitolUl = document.getElementById('capitol');
-var alkiUl = document.getElementById('alki');
+var pike = document.getElementById('pike');
+var airport = document.getElementById('airport');
+var seaCent = document.getElementById('seaCent');
+var capitol = document.getElementById('capitol');
+var alki = document.getElementById('alki');
+
+var table = document.getElementById('table');
+
+var thead = document.createElement('th');
+
+thead = function () {
+    for (var i = 0; i = hours.length; i++) {
+        var tdEl = document.createElement('td');
+        tdEl.textContent = hours[i];
+    }
+}
 
 function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
     this.name = name;
@@ -15,7 +26,6 @@ function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
     this.avgCookie = avgCookie;
     this.list = list;
     this.bigAssArray = [];
-    // console.log(bigAssArray);
     this.random = function(){
         for (var j=0; j < hours.length; j++){
             var cookiesPerHr = Math.floor(Math.random() * ((this.minHrlyCust, this.maxHrlyCust) * this.avgCookie)+1);
@@ -29,7 +39,6 @@ function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
         var table = document.getElementById('table');
         var trEl = document.createElement('tr');
         var thEl = document.createElement('th');
-        var tfootEl = document.createElement('tfoot');
         thEl.textContent = this.name;
         trEl.appendChild(thEl);
         // var tdEl = document.createElement('td');
@@ -41,34 +50,38 @@ function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
         }
         console.log("trel  " + trEl);
         table.appendChild(trEl);
-        tfootEl = [this.bigAssArray]; function math() {
-            var math = 0;
-            for (var i=0; i < tfootEl.length; i++) {
-                math = math + tfootEl[i];
-            }
-            return math;
-        }
-        console.log(math());
+        
     }
 }
+var tfootEl = document.createElement('tfoot');
 
-var firstPike = new Stores('First and Pike', 23, 65, pikeUl, 6.5);
+
+// tfootEl = [this.bigAssArray]; function math() {
+//     var math = 0;
+//     for (var i=0; i < tfootEl.length; i++) {
+//         math = math + tfootEl[i];
+//     }
+//     return math;
+// }
+// console.log(math());
+
+var firstPike = new Stores('First and Pike', 23, 65, pike, 6.5);
 firstPike.random();
 firstPike.render();
 
-var seaTac = new Stores('SeaTac', 3, 24, airportUl, 1.2);
+var seaTac = new Stores('SeaTac Airport', 3, 24, airport, 1.2);
 seaTac.random();
 seaTac.render();
 
-var seaCent = new Stores('seacent', 11, 38, seaCentUl, 3.7);
+var seaCent = new Stores('Seattle Center', 11, 38, seaCent, 3.7);
 seaCent.random();
 seaCent.render();
 
-var capHill = new Stores('caphil', 20, 38, capitolUl, 2.3);
+var capHill = new Stores('Capitol Hill', 20, 38, capitol, 2.3);
 capHill.random();
 capHill.render();
 
-var alki = new Stores('alki', 2, 16, alkiUl, 4.6);
+var alki = new Stores('Alki Beach', 2, 16, alki, 4.6);
 alki.random();
 alki.render();
 
