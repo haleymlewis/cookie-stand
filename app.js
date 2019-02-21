@@ -10,21 +10,22 @@ var alki = document.getElementById('alki');
 
 var allShops = [pike, airport, seaCent, capitol, alki];
 
-var table = document.getElementById('table');
+
 
 var thead = document.createElement('th');
 
 /// Header Row Creation
 function header() {
   console.log('thead fired');
+  var table = document.getElementById('table');
   var trEl = document.createElement('tr');
-
+  table.appendChild(trEl);
   var thEl = document.createElement('th');
   thEl.textContent = 'Locations';
   trEl.appendChild(thEl);
 
   for (var i = 0; i < hours.length; i++) {
-    var thEl = document.createElement('th');
+    thEl = document.createElement('th');
     thEl.textContent = hours[i];
     trEl.appendChild(thEl);
   }
