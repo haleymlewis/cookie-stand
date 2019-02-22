@@ -18,6 +18,7 @@ var thead = document.createElement('th');
 function header() {
   console.log('thead fired');
   var trEl = document.createElement('tr');
+  table.appendChild(trEl);
 ///////// Creating Header Locations Column
   var thEl = document.createElement('th');
   thEl.textContent = 'Locations';
@@ -42,9 +43,10 @@ function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
   this.maxHrlyCust = maxHrlyCust;
   this.avgCookie = avgCookie;
   this.randomCookies = [];
-  this.cookiesPerHr = []; //new line
+  this.cookiesPerHr = [];
   this.totalDailyCookies = 0;
   this.random = function () {
+////////// Random Cookie Generation 
     for (var j = 0; j < hours.length; j++) {
       var cookiesPerHr = Math.floor(Math.random() * ((this.minHrlyCust, this.maxHrlyCust) * this.avgCookie) + 1);
       this.randomCookies.push(cookiesPerHr);
@@ -52,7 +54,7 @@ function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
     }
     console.log(this.randomCookies);
 
-  ////////// Render Function Inside Constructor
+////////// Render Function Inside Constructor
   };
   this.render = function () {
     var table = document.getElementById('table');
@@ -60,16 +62,16 @@ function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
     var tdEl = document.createElement('td');
     
     tdEl.textContent = this.name;
-    trEl.appendChild(tdEl); // appending td to tr
+    trEl.appendChild(tdEl); 
     
-  ////////// Random Cookie Generation
+////////// Random Cookies added to Table
     for (var i = 0; i < this.randomCookies.length; i++) {
       tdEl = document.createElement('td');
       tdEl.textContent = this.randomCookies[i];
       console.log("tdel " + tdEl);
       trEl.appendChild(tdEl);
     }
-
+////////// 
     var thEl = document.createElement('th');
     thEl.textContent = this.randomCookies;
     trEl.appendChild(thEl);
@@ -78,6 +80,7 @@ function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
     table.appendChild(trEl);
   }
 }
+////////// Calling all the shit I built up top
 
 header();
 var firstPike = new Stores('First and Pike', 23, 65, pike, 6.5);
