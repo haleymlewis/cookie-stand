@@ -7,18 +7,16 @@ var airport = document.getElementById('airport');
 var seaCent = document.getElementById('seaCent');
 var capitol = document.getElementById('capitol');
 var alki = document.getElementById('alki');
+var shopList = [];
 
 var allShops = [pike, airport, seaCent, capitol, alki];
 
 var table = document.getElementById('table');
 
-var thead = document.createElement('th');
-
 ////////// Header Row Creation
 function header() {
   console.log('thead fired');
   var trEl = document.createElement('tr');
-  table.appendChild(trEl);
 ///////// Creating Header Locations Column
   var thEl = document.createElement('th');
   thEl.textContent = 'Locations';
@@ -30,10 +28,10 @@ function header() {
     trEl.appendChild(thEl);
   }
 ////////// Adding Location Totals Column to Header
-  thEl = document.createElement('th');
-  thEl.textContent = 'Location Totals';
-  trEl.appendChild(thEl);
-  table.appendChild(thEl);
+  var thEl2 = document.createElement('th');
+  thEl2.textContent = 'Location Totals';
+  trEl.appendChild(thEl2);
+  table.appendChild(trEl);
 }
 
 ////////// Constructor Function for Table
@@ -43,14 +41,13 @@ function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
   this.maxHrlyCust = maxHrlyCust;
   this.avgCookie = avgCookie;
   this.randomCookies = [];
-  this.cookiesPerHr = [];
   this.totalDailyCookies = 0;
   this.random = function () {
 ////////// Random Cookie Generation 
     for (var j = 0; j < hours.length; j++) {
-      var cookiesPerHr = Math.floor(Math.random() * ((this.minHrlyCust, this.maxHrlyCust) * this.avgCookie) + 1);
+      var custPerHr = Math.floor(Math.random() * (this.maxHrlyCust - this.minHrlyCust) + this.minHrlyCust);
+      var cookiesPerHr = Math.floor(custPerHr * this.avgCookie);
       this.randomCookies.push(cookiesPerHr);
-      // return cookiesPerHr;
     }
     console.log(this.randomCookies);
 
@@ -60,7 +57,6 @@ function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
     var table = document.getElementById('table');
     var trEl = document.createElement('tr');
     var tdEl = document.createElement('td');
-    
     tdEl.textContent = this.name;
     trEl.appendChild(tdEl); 
     
@@ -71,15 +67,21 @@ function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
       console.log("tdel " + tdEl);
       trEl.appendChild(tdEl);
     }
+    for (var i = 0; i < this.randomCookies.length; i++) {
+      this.totalDailyCookies = this.totalDailyCookies + this.randomCookies[i];
+    }
 ////////// 
     var thEl = document.createElement('th');
-    thEl.textContent = this.randomCookies;
+    thEl.textContent = this.totalDailyCookies;
     trEl.appendChild(thEl);
 
     console.log("trel  " + trEl);
     table.appendChild(trEl);
   }
+  shopList.push(this);
 }
+
+
 ////////// Calling all the shit I built up top
 
 header();
@@ -102,11 +104,3 @@ capHill.render();
 var alki = new Stores('Alki Beach', 2, 16, alki, 4.6);
 alki.random();
 alki.render();
-
-
-(function renderTable() {
-  header();
-  for(var i = 0; i < allShops; i++) {
-    allShops[i].render();
-  }
-})();

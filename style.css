@@ -11,7 +11,7 @@ thead {
     background: #888;
   }
   
-td {
+td, th, tr {
     padding: 20px;
     border: solid 1px black;
   }
