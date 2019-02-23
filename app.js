@@ -126,6 +126,7 @@ var alki = new Stores('Alki Beach', 2, 16, alki, 4.6);
 alki.random();
 alki.render();
 
+<<<<<<< HEAD
 footer();
 
 ///////// Jeff Code Review 2-23
@@ -157,3 +158,6 @@ footer();
 //   table.appendChild(trEl);
 
 // }
+=======
+footer();
+>>>>>>> ee8eb7e7d39deda66f766b6a90fc8398b7d15c93
