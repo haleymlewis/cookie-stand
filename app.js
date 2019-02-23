@@ -7,9 +7,10 @@ var airport = document.getElementById('airport');
 var seaCent = document.getElementById('seaCent');
 var capitol = document.getElementById('capitol');
 var alki = document.getElementById('alki');
+var cookiesSoldPerHour = [];
 var shopList = [];
-
 var allShops = [pike, airport, seaCent, capitol, alki];
+var totalOfTotals = 0;
 
 var table = document.getElementById('table');
 
@@ -47,6 +48,7 @@ function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
     for (var j = 0; j < hours.length; j++) {
       var custPerHr = Math.floor(Math.random() * (this.maxHrlyCust - this.minHrlyCust) + this.minHrlyCust);
       var cookiesPerHr = Math.floor(custPerHr * this.avgCookie);
+      debugger;
       this.randomCookies.push(cookiesPerHr);
     }
     console.log(this.randomCookies);
@@ -67,10 +69,10 @@ function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
       console.log("tdel " + tdEl);
       trEl.appendChild(tdEl);
     }
+////////// Math to Calculate Shop Totals
     for (var i = 0; i < this.randomCookies.length; i++) {
       this.totalDailyCookies = this.totalDailyCookies + this.randomCookies[i];
     }
-////////// 
     var thEl = document.createElement('th');
     thEl.textContent = this.totalDailyCookies;
     trEl.appendChild(thEl);
@@ -81,10 +83,29 @@ function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
   shopList.push(this);
 }
 
-
+function footer() {
+  console.log('footer fired');
+  for (var j = 0; j < hours.length; j++){
+   for (var i = 0; i < shopList[i], cookiesSoldPerHour.length; i++){
+      cookiesSoldPerHour[i] += shopList[j].randomCookies[i]
+      totalOfTotals += cookiesSoldPerHour;
+    };
+  };
+  var trEl = document.createElement('tr');
+  var tdEl = document.createElement('td');
+  tdEl.textContent = 'Total Cookies';
+  trEl.appendChild(tdEl);
+  for (var i = 0; i < hours.length; i++) {
+    var tdEl = document.createElement('td');
+    tdEl.textContent = cookiesSoldPerHour[i];
+    trEl.appendChild(tdEl);
+  }
+  table.appendChild(trEl);
+}
 ////////// Calling all the shit I built up top
 
 header();
+
 var firstPike = new Stores('First and Pike', 23, 65, pike, 6.5);
 firstPike.random();
 firstPike.render();
@@ -104,3 +125,35 @@ capHill.render();
 var alki = new Stores('Alki Beach', 2, 16, alki, 4.6);
 alki.random();
 alki.render();
+
+footer();
+
+///////// Jeff Code Review 2-23
+// function makeFooterRow(){
+//   var trEl = document.createElement('tr');
+//   var thEl = document.createElement('th');
+//   thEl.textContent = 'Hourly Totals for All Locations';
+//   trEl.appendChild(thEl);
+
+//   var totalOfTotals = 0;
+//   var hourlyTotal = 0;
+
+//   debugger;
+//   for (var i = 0; i < hours.length; i++){
+//     hourlyTotal = 0;
+//     for (var j = 0; j < allShops.length; j++) {
+//       hourlyTotal += allShops[j].cookiesPerHr[i];
+//       totalOfTotals += allShops[j].cookiesPerHr[i];
+      
+//     }
+//     thEl = document. createElement('th');
+//     thEl.textContent = hourlyTotal;
+//     trEl.appendChild(thEl);
+//   }
+
+//   thEl = document.createElement('th');
+//   thEl.textContent = totalOfTotals;
+//   trEl. appendChild(thEl);
+//   table.appendChild(trEl);
+
+// }
