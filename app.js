@@ -9,26 +9,26 @@ var capitol = document.getElementById('capitol');
 var alki = document.getElementById('alki');
 var cookiesSoldPerHour = [];
 var shopList = [];
-var allShops = [pike, airport, seaCent, capitol, alki];
-var totalOfTotals = 0;
+var allShops = [firstPike, seaTac, seaCent, capHill, alki];
+// var totalOfTotals = 0;
 
-var table = document.getElementById('table');
+var table = document.getElementById('ElementTable');
 
 ////////// Header Row Creation
 function header() {
   console.log('thead fired');
   var trEl = document.createElement('tr');
-///////// Creating Header Locations Column
+  ///////// Creating Header Locations Column
   var thEl = document.createElement('th');
   thEl.textContent = 'Locations';
   trEl.appendChild(thEl);
-////////// Adding Shop Hours to Header
+  ////////// Adding Shop Hours to Header
   for (var i = 0; i < hours.length; i++) {
     var thEl = document.createElement('th');
     thEl.textContent = hours[i];
     trEl.appendChild(thEl);
   }
-////////// Adding Location Totals Column to Header
+  ////////// Adding Location Totals Column to Header
   var thEl2 = document.createElement('th');
   thEl2.textContent = 'Location Totals';
   trEl.appendChild(thEl2);
@@ -44,32 +44,32 @@ function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
   this.randomCookies = [];
   this.totalDailyCookies = 0;
   this.random = function () {
-////////// Random Cookie Generation 
+    ////////// Random Cookie Generation
     for (var j = 0; j < hours.length; j++) {
       var custPerHr = Math.floor(Math.random() * (this.maxHrlyCust - this.minHrlyCust) + this.minHrlyCust);
       var cookiesPerHr = Math.floor(custPerHr * this.avgCookie);
-      debugger;
+      // debugger;
       this.randomCookies.push(cookiesPerHr);
     }
     console.log(this.randomCookies);
 
-////////// Render Function Inside Constructor
+    ////////// Render Function Inside Constructor
   };
   this.render = function () {
-    var table = document.getElementById('table');
+    var table = document.getElementById('ElementTable');
     var trEl = document.createElement('tr');
     var tdEl = document.createElement('td');
     tdEl.textContent = this.name;
-    trEl.appendChild(tdEl); 
-    
-////////// Random Cookies added to Table
+    trEl.appendChild(tdEl);
+
+    ////////// Random Cookies added to Table
     for (var i = 0; i < this.randomCookies.length; i++) {
       tdEl = document.createElement('td');
       tdEl.textContent = this.randomCookies[i];
-      console.log("tdel " + tdEl);
+      console.log('tdel ' + tdEl);
       trEl.appendChild(tdEl);
     }
-////////// Math to Calculate Shop Totals
+    ////////// Math to Calculate Shop Totals
     for (var i = 0; i < this.randomCookies.length; i++) {
       this.totalDailyCookies = this.totalDailyCookies + this.randomCookies[i];
     }
@@ -77,30 +77,39 @@ function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
     thEl.textContent = this.totalDailyCookies;
     trEl.appendChild(thEl);
 
-    console.log("trel  " + trEl);
+    console.log('trel  ' + trEl);
     table.appendChild(trEl);
-  }
+  };
   shopList.push(this);
 }
+////////// Footer Function
 
 function footer() {
   console.log('footer fired');
-  for (var j = 0; j < hours.length; j++){
-   for (var i = 0; i < shopList[i], cookiesSoldPerHour.length; i++){
-      cookiesSoldPerHour[i] += shopList[j].randomCookies[i]
-      totalOfTotals += cookiesSoldPerHour;
-    };
-  };
   var trEl = document.createElement('tr');
   var tdEl = document.createElement('td');
-  tdEl.textContent = 'Total Cookies';
+  tdEl.textContent = 'Hourly Totals for All Locations';
   trEl.appendChild(tdEl);
-  for (var i = 0; i < hours.length; i++) {
-    var tdEl = document.createElement('td');
-    tdEl.textContent = cookiesSoldPerHour[i];
+  var hourlyTotals = 0;
+  var totalOfTotals = 0;
+
+  for (var j = 0; j < hours.length; j++) {
+    hourlyTotals = 0;
+    for (var i = 0; i < shopList.length; i++) {
+      hourlyTotals = hourlyTotals + shopList[i].randomCookies[j];
+    }
+    totalOfTotals += hourlyTotals;
+    tdEl = document.createElement('td');
+    tdEl.textContent = hourlyTotals;
     trEl.appendChild(tdEl);
+
   }
+
+  var thEl2 = document.createElement('th');
+  thEl2.textContent = totalOfTotals;
+  trEl.appendChild(thEl2);
   table.appendChild(trEl);
+
 }
 ////////// Calling all the shit I built up top
 
@@ -114,7 +123,7 @@ var seaTac = new Stores('SeaTac Airport', 3, 24, airport, 1.2);
 seaTac.random();
 seaTac.render();
 
-var seaCent = new Stores('Seattle Center', 11, 38, seaCent, 3.7);
+seaCent = new Stores('Seattle Center', 11, 38, seaCent, 3.7);
 seaCent.random();
 seaCent.render();
 
@@ -122,14 +131,14 @@ var capHill = new Stores('Capitol Hill', 20, 38, capitol, 2.3);
 capHill.random();
 capHill.render();
 
-var alki = new Stores('Alki Beach', 2, 16, alki, 4.6);
+alki = new Stores('Alki Beach', 2, 16, alki, 4.6);
 alki.random();
 alki.render();
 
-<<<<<<< HEAD
+console.log(footer, 'footer');
 footer();
 
-///////// Jeff Code Review 2-23
+///////// Jeff Code Review 2-23: How to Build a Footer
 // function makeFooterRow(){
 //   var trEl = document.createElement('tr');
 //   var thEl = document.createElement('th');
@@ -145,7 +154,7 @@ footer();
 //     for (var j = 0; j < allShops.length; j++) {
 //       hourlyTotal += allShops[j].cookiesPerHr[i];
 //       totalOfTotals += allShops[j].cookiesPerHr[i];
-      
+
 //     }
 //     thEl = document. createElement('th');
 //     thEl.textContent = hourlyTotal;
@@ -158,6 +167,3 @@ footer();
 //   table.appendChild(trEl);
 
 // }
-=======
-footer();
->>>>>>> ee8eb7e7d39deda66f766b6a90fc8398b7d15c93
