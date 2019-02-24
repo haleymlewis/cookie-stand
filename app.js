@@ -96,23 +96,19 @@ function footer() {
   for (var j = 0; j < hours.length; j++) {
     for (var i = 0; i < shopList.length; i++) {
       hourlyTotals = hourlyTotals + shopList[i].randomCookies[j];
-      totalOfTotals += shopList[i].randomCookies[j];
+      totalOfTotals = totalOfTotals + shopList[i].randomCookies[j];
     }
     tdEl = document.createElement('td');
     tdEl.textContent = hourlyTotals;
     trEl.appendChild(tdEl);
-    console.log('Hour Totals',totalOfTotals);
+
   }
-  trEl.appendChild(tdEl);
 
   var thEl2 = document.createElement('th');
   thEl2.textContent = totalOfTotals;
   trEl.appendChild(thEl2);
-
   table.appendChild(trEl);
-  console.log('Table Footer Elements', trEl);
 
-  console.log(totalOfTotals,'total totals');
 }
 ////////// Calling all the shit I built up top
 
