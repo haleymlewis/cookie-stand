@@ -94,10 +94,11 @@ function footer() {
   var totalOfTotals = 0;
 
   for (var j = 0; j < hours.length; j++) {
+    hourlyTotals = 0;
     for (var i = 0; i < shopList.length; i++) {
       hourlyTotals = hourlyTotals + shopList[i].randomCookies[j];
-      totalOfTotals = totalOfTotals + shopList[i].randomCookies[j];
     }
+    totalOfTotals += hourlyTotals;
     tdEl = document.createElement('td');
     tdEl.textContent = hourlyTotals;
     trEl.appendChild(tdEl);
