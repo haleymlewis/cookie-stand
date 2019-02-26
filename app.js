@@ -83,48 +83,48 @@ function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
   shopList.push(this);
 }
 ////////// ******************Form Functions*********************** //////////
-var shopForm = document.getElementById('store-form');
-var submit = document.getElementById('submit');
+// var shopForm = document.getElementById('store-form');
+// var submit = document.getElementById('submit');
 
-var Newstore = function(location, minHrlyCust, maxHrlyCust, avgCookie) {
-  this.location = location;
-  this.minHrlyCust = minHrlyCust;
-  this.maxHrlyCust = maxHrlyCust;
-  this.avgCookie = avgCookie;
-};
+// var Newstore = function(location, minHrlyCust, maxHrlyCust, avgCookie) {
+//   this.location = location;
+//   this.minHrlyCust = minHrlyCust;
+//   this.maxHrlyCust = maxHrlyCust;
+//   this.avgCookie = avgCookie;
+// };
 
-Newstore.prototype.render = function() {
-  var liEl = document.createElement('li');
-  liEl.innerHTML = ' <b>' + this.location + ': </b><em>' + this.minHrlyCust + '</em><em>' + this.maxHrlyCust + '</em><em>' + this.avgCookie + '</em>';
-  return liEl;
-};
+// Newstore.prototype.render = function() {
+//   var liEl = document.createElement('li');
+//   liEl.innerHTML = ' <b>' + this.location + ': </b><em>' + this.minHrlyCust + '</em><em>' + this.maxHrlyCust + '</em><em>' + this.avgCookie + '</em>';
+//   return liEl;
+// };
 
-function handleStoreSubmit(submit) {
-  event.preventDefault();
-  var location = event.target.location.value;
-  var minCust = event.target.minimum.value;
-  var maxCust = event.target.maximum.value;
-  var avg = event.target.average.value;
+// function handleStoreSubmit(submit) {
+//   event.preventDefault();
+//   var location = event.target.location.value;
+//   var minCust = event.target.minimum.value;
+//   var maxCust = event.target.maximum.value;
+//   var avg = event.target.average.value;
 
-  var newStore = new Newstore(location, minHrlyCust, maxHrlyCust, avgCookie);
+//   var newStore = new Newstore(location, minHrlyCust, maxHrlyCust, avgCookie);
 
-  event.target.storename.value = null;
-  event.target.mincust.value = null;
-  event.target.maxcust.value = null;
-  event.target.avgcookie.value = null;
+//   event.target.storename.value = null;
+//   event.target.mincust.value = null;
+//   event.target.maxcust.value = null;
+//   event.target.avgcookie.value = null;
   
-  shopList.unshift(newStore);
-  renderShopList();
-}
+//   shopList.unshift(newStore);
+//   renderShopList();
+// }
 
-function renderShopList() {
-  shopList.innerHTML = '';
-  for(var i = 0; i < shopList.length; i++) {
-    shopList.appendChild(shopList[i].render());
-  }
-}
+// function renderShopList() {
+//   shopList.innerHTML = '';
+//   for(var i = 0; i < shopList.length; i++) {
+//     shopList.appendChild(shopList[i].render());
+//   }
+// }
 
-shopForm.addEventListener(submit, handleStoreSubmit());
+// shopForm.addEventListener(submit, handleStoreSubmit());
 
 ////////// Footer Function //////////
 
