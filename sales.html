@@ -12,12 +12,35 @@
 
   <img src="images/salmon.png">
 
-  <table id="ElementTable">
-
-  </table>
-
-
+  
+  <table id="ElementTable"></table>
+  
   <script src="app.js"></script>
+  <form id="store-form">
+      <fieldset>
+          <legend>Add Store Locations</legend>
+   
+          <label for="storename">Name of Location</label>
+          <input name="storename" type="text"/>
+   
+          <label for="mincust">Minimum Customers Per Hour</label>
+          <input name="mincust" type="text"/>
+   
+          <label for="maxcust">Maximum Customers Per Hour</label>
+          <input name="maxcust" type="text"/>
+   
+          <label for="avgcookie">Average Cookies Per Sale</label>
+          <input name="avgcookie" type="text"/>
+   
+          <button type="submit">Create A New Store</button>
+      </fieldset>
+    </form>
+      <table id="cookiedata">
+        <thead id="tableHead">
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+        <tfoot id="tableFoot"></tfoot>
 </body>
 
 </html>

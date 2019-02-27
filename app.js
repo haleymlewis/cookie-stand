@@ -14,28 +14,28 @@ var allShops = [firstPike, seaTac, seaCent, capHill, alki];
 
 var table = document.getElementById('ElementTable');
 
-////////// Header Row Creation
+////////// Header Row Creation //////////
 function header() {
   console.log('thead fired');
   var trEl = document.createElement('tr');
-  ///////// Creating Header Locations Column
+  ///////// Creating Header Locations Column //////////
   var thEl = document.createElement('th');
   thEl.textContent = 'Locations';
   trEl.appendChild(thEl);
-  ////////// Adding Shop Hours to Header
+  ////////// Adding Shop Hours to Header //////////
   for (var i = 0; i < hours.length; i++) {
     var thEl = document.createElement('th');
     thEl.textContent = hours[i];
     trEl.appendChild(thEl);
   }
-  ////////// Adding Location Totals Column to Header
+  ////////// Adding Location Totals Column to Header //////////
   var thEl2 = document.createElement('th');
   thEl2.textContent = 'Location Totals';
   trEl.appendChild(thEl2);
   table.appendChild(trEl);
 }
 
-////////// Constructor Function for Table
+////////// Constructor Function for Table //////////
 function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
   this.name = name;
   this.minHrlyCust = minHrlyCust;
@@ -44,7 +44,7 @@ function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
   this.randomCookies = [];
   this.totalDailyCookies = 0;
   this.random = function () {
-    ////////// Random Cookie Generation
+    ////////// Random Cookie Generation //////////
     for (var j = 0; j < hours.length; j++) {
       var custPerHr = Math.floor(Math.random() * (this.maxHrlyCust - this.minHrlyCust) + this.minHrlyCust);
       var cookiesPerHr = Math.floor(custPerHr * this.avgCookie);
@@ -53,7 +53,7 @@ function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
     }
     console.log(this.randomCookies);
 
-    ////////// Render Function Inside Constructor
+    ////////// Render Function Inside Constructor //////////
   };
   this.render = function () {
     var table = document.getElementById('ElementTable');
@@ -62,14 +62,14 @@ function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
     tdEl.textContent = this.name;
     trEl.appendChild(tdEl);
 
-    ////////// Random Cookies added to Table
+    ////////// Random Cookies added to Table//////////
     for (var i = 0; i < this.randomCookies.length; i++) {
       tdEl = document.createElement('td');
       tdEl.textContent = this.randomCookies[i];
       console.log('tdel ' + tdEl);
       trEl.appendChild(tdEl);
     }
-    ////////// Math to Calculate Shop Totals
+    ////////// Math to Calculate Shop Totals //////////
     for (var i = 0; i < this.randomCookies.length; i++) {
       this.totalDailyCookies = this.totalDailyCookies + this.randomCookies[i];
     }
@@ -82,7 +82,52 @@ function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
   };
   shopList.push(this);
 }
-////////// Footer Function
+////////// ******************Form Functions*********************** //////////
+var shopForm = document.getElementById('store-form');
+// var submit = document.getElementById('submit');
+
+var Newstore = function(location, minHrlyCust, maxHrlyCust, avgCookie) {
+  this.location = location;
+  this.minHrlyCust = minHrlyCust;
+  this.maxHrlyCust = maxHrlyCust;
+  this.avgCookie = avgCookie;
+};
+
+Newstore.prototype.render = function() {
+  var liEl = document.createElement('li');
+  liEl.innerHTML = ' <b>' + this.location + ': </b><em>' + this.minHrlyCust + '</em><em>' + this.maxHrlyCust + '</em><em>' + this.avgCookie + '</em>';
+  return liEl;
+};
+
+function handleStoreSubmit(event) {
+  event.preventDefault();
+  var location = event.target.storename.value;
+  var minHrlyCust = event.target.mincust.value;
+  var maxHrlyCust = event.target.maxcust.value;
+  var avgCookie = event.target.avgcookie.value;
+  
+  var newStore = new Newstore(location, minHrlyCust, maxHrlyCust, avgCookie);
+
+  event.target.storename.value = null;
+  event.target.mincust.value = null;
+  event.target.maxcust.value = null;
+  event.target.avgcookie.value = null;
+  
+  shopList.unshift(newStore);
+  Newstore.render();
+}
+
+function renderShopList() {
+  shopList.innerHTML = '';
+  for(var i = 0; i < shopList.length; i++) {
+    shopList.appendChild(shopList[i].render());
+  }
+}
+
+shopForm.addEventListener('submit', handleStoreSubmit);
+renderShopList();
+
+////////// Footer Function //////////
 
 function footer() {
   console.log('footer fired');
