@@ -36,7 +36,7 @@ function header() {
 }
 
 ////////// Constructor Function for Table //////////
-function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
+function Stores(name, minHrlyCust, maxHrlyCust, avgCookie) {
   this.name = name;
   this.minHrlyCust = minHrlyCust;
   this.maxHrlyCust = maxHrlyCust;
@@ -86,14 +86,14 @@ function Stores(name, minHrlyCust, maxHrlyCust, list, avgCookie) {
 var shopForm = document.getElementById('store-form');
 // var submit = document.getElementById('submit');
 
-var Newstore = function(location, minHrlyCust, maxHrlyCust, avgCookie) {
-  this.location = location;
-  this.minHrlyCust = minHrlyCust;
-  this.maxHrlyCust = maxHrlyCust;
-  this.avgCookie = avgCookie;
-};
+// var Newstore = function(location, minHrlyCust, maxHrlyCust, avgCookie) {
+//   this.location = location;
+//   this.minHrlyCust = minHrlyCust;
+//   this.maxHrlyCust = maxHrlyCust;
+//   this.avgCookie = avgCookie;
+// };
 
-Newstore.prototype.render = function() {
+Stores.prototype.render = function() {
   var liEl = document.createElement('li');
   liEl.innerHTML = ' <b>' + this.location + ': </b><em>' + this.minHrlyCust + '</em><em>' + this.maxHrlyCust + '</em><em>' + this.avgCookie + '</em>';
   return liEl;
@@ -106,7 +106,7 @@ function handleStoreSubmit(event) {
   var maxHrlyCust = event.target.maxcust.value;
   var avgCookie = event.target.avgcookie.value;
   
-  var newStore = new Newstore(location, minHrlyCust, maxHrlyCust, avgCookie);
+  var newStore = new Stores(location, minHrlyCust, maxHrlyCust, avgCookie);
 
   event.target.storename.value = null;
   event.target.mincust.value = null;
@@ -114,7 +114,8 @@ function handleStoreSubmit(event) {
   event.target.avgcookie.value = null;
   
   shopList.unshift(newStore);
-  Newstore.render();
+  newStore.random();
+  newStore.render();
 }
 
 function renderShopList() {
@@ -160,23 +161,23 @@ function footer() {
 
 header();
 
-var firstPike = new Stores('First and Pike', 23, 65, pike, 6.5);
+var firstPike = new Stores('First and Pike', 23, 65, 6.5);
 firstPike.random();
 firstPike.render();
 
-var seaTac = new Stores('SeaTac Airport', 3, 24, airport, 1.2);
+var seaTac = new Stores('SeaTac Airport', 3, 24, 1.2);
 seaTac.random();
 seaTac.render();
 
-seaCent = new Stores('Seattle Center', 11, 38, seaCent, 3.7);
+seaCent = new Stores('Seattle Center', 11, 38, 3.7);
 seaCent.random();
 seaCent.render();
 
-var capHill = new Stores('Capitol Hill', 20, 38, capitol, 2.3);
+var capHill = new Stores('Capitol Hill', 20, 38, 2.3);
 capHill.random();
 capHill.render();
 
-alki = new Stores('Alki Beach', 2, 16, alki, 4.6);
+alki = new Stores('Alki Beach', 2, 16, 4.6);
 alki.random();
 alki.render();
 
